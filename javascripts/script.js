@@ -43,41 +43,73 @@
     var hour = a.getHours();
     var min = a.getMinutes();
     var sec = a.getSeconds();
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
     return time;
   }
+
+  var getInfoCardColour = function(limit1, limit2, val) {
+    var colours_asc = ['bg-red', 'bg-orange', 'bg-yellow', 'bg-aqua', 'bg-green'];
+    if (limit1 > limit2) {
+      var min = limit2, max = limit1, colors = colours_asc.reverse();
+    }
+    else {
+      var min = limit1, max = limit2, colors = colours_asc;
+    }
+
+    if(max <= 0 || val >= max) {
+      return colors.pop();
+    }
+    else {
+      var category = Math.floor((colors.length * (val - min))/(max - min));
+      return colors.slice(category)[0];
+    }
+  }
+
   /**
    * Visualization Logic.
    */
   var updateInfoCards = function(stats){
-    $('.js-content-header span').text(stats.project.data.title) ;
-    $('.js-content-header small').text(stats.project.name) ;
+    $('.js-content-header span').text(stats.project.data.title);
+    $('.js-content-header small').text(stats.project.name);
 
-    $('.js-snapshot .info-box-number').text(stats.snapshot.progress + '%') ;
-    $('.js-snapshot .progress-bar').width(stats.snapshot.progress + '%') ;
+    $('.js-snapshot .info-box-number').text(stats.snapshot.progress + '%');
+    $('.js-snapshot .progress-bar').width(stats.snapshot.progress + '%');
     $('.js-snapshot .progress-description').text(timeConverter(stats.snapshot.created));
+    $('.js-snapshot').addClass(getInfoCardColour(99, 100, stats.snapshot.progress));
+
+    if (stats.snapshot.progress < 100) {
+      return;
+    }
 
     $('.js-project-download .info-box-number').text(stats.project.downloads);
+    $('.js-project-download').addClass(getInfoCardColour(0, 10000, stats.project.downloads));
 
     $('.js-project-comments .info-box-number').text(stats.comments.totalCount);
+    $('.js-project-comments').addClass(getInfoCardColour(0, (stats.issues.totalCount * 5), stats.comments.totalCount));
     $('.js-project-issues .info-box-number').text(stats.issues.totalCount);
+    var issueClosedPercent = 100;
     if (stats.issues.totalCount > 0) {
-      $('.js-project-issues .progress-bar').width((100 *stats.issues.closedCount/stats.issues.totalCount) + '%');
+      issueClosedPercent = 100 *stats.issues.closedCount/stats.issues.totalCount;
+      $('.js-project-issues .progress-bar').width((issueClosedPercent) + '%');
     };
     $('.js-project-issues .progress-description').text(stats.issues.openCount + ' open issues');
+    $('.js-project-issues').addClass(getInfoCardColour(0, 100, issueClosedPercent));
 
     $('.js-project-open-issues .count').text(stats.issues.openCount);
+    $('.js-project-open-issues').addClass(getInfoCardColour(50, 0, stats.issues.openCount));
     $('.js-project-open-issues a.issues-link').attr('href', 'https://www.drupal.org/project/issues/' + stats.project.name);
   }
-
+debugger;
   queue()
     .defer(d3.json, "data/" + QueryString.project + ".json")
     .await(ready);
 
   function ready(error, stats) {
     updateInfoCards(stats);
+    if (stats.snapshot.progress < 100) {
+      return;
+    }
     console.log(stats);
-    debugger;
     var map = new Datamap({
       element: document.getElementById('map-container'),
       fills: {
