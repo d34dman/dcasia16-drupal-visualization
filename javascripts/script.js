@@ -193,16 +193,16 @@
       if ($this.parent().hasClass('active')) { return false};
 
       switch($this.attr('data-trigger')) {
-        case 'total':
+        case 'interactions':
           break;
 
-        case 'group-1':
+        case 'gender':
           break;
 
-        case 'group-2':
+        case 'last-activity':
           break;
 
-        case 'group-3':
+        case 'age':
           break;
 
         default:
