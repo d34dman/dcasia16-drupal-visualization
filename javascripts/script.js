@@ -137,6 +137,62 @@ debugger;
         }
       }
     });
+
+    $('#map-container-control li > a').click(function(event){
+      event.stopPropagation();
+      var $this = $(this);
+      if ($this.parent().hasClass('active')) { return false};
+
+      switch($this.attr('data-trigger')) {
+        case 'total':
+          break;
+
+        case 'users':
+          break;
+
+        case 'issues':
+          break;
+
+        case 'comments':
+          break;
+
+        default:
+          return false;
+
+      }
+      $('#map-container-control li').removeClass('active');
+      $this.parent().addClass('active');
+      return false;
+    });
+
+    $('#user-container-control li > a').click(function(event){
+      event.stopPropagation();
+      var $this = $(this);
+      if ($this.parent().hasClass('active')) { return false};
+
+      switch($this.attr('data-trigger')) {
+        case 'total':
+          break;
+
+        case 'group-1':
+          break;
+
+        case 'group-2':
+          break;
+
+        case 'group-3':
+          break;
+
+        default:
+          return false;
+
+      }
+      $('#user-container-control li').removeClass('active');
+      $this.parent().addClass('active');
+      return false;
+    });
+
+
   }
 
 })(jQuery);
