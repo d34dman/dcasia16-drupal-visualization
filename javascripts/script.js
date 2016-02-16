@@ -213,6 +213,7 @@
       $this.parent().addClass('active');
       return false;
     });
+    $('#user-container-control li:first > a').click();
 
 
   }
