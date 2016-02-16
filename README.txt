@@ -1,8 +1,11 @@
 1. USAGE
   Visualization is available at Github Page http://d34dman.github.io/dcasia16-drupal-visualization/
 
-1. CREDITS
-  1. Theme:
+2. ADVANCED SETUP
+  @TODO
+  
+3. CREDITS
+  1. THEME:
     1. Bootstrap Theme
     2. AdminLTE Dashboard Theme
   2. LIBRARIES:
