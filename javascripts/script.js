@@ -182,6 +182,7 @@
       $this.parent().addClass('active');
       return false;
     });
+    $('#map-container-control li:first > a').click();
 
     $('#user-container-control li > a').click(function(event){
       event.stopPropagation();
