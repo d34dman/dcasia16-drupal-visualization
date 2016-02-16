@@ -126,6 +126,7 @@
     var maxComments = Math.max.apply(Math,worldStatsArray.map(function(o){return o.commentsCount;}))
     var maxIssues = Math.max.apply(Math,worldStatsArray.map(function(o){return o.issuesCount;}))
     var maxTotal = Math.max.apply(Math,worldStatsArray.map(function(o){return o.totalCount;}))
+    var maxUsers = Math.max.apply(Math,worldStatsArray.map(function(o){return o.usersCount;}))
     console.log(stats);
     var worldStatsMap = new Datamap({
       element: document.getElementById('map-container'),
@@ -142,9 +143,9 @@
           }
           return ['<div class="hoverinfo bg-aqua">',
             '<strong>', geo.properties.name, '</strong>',
-            '&nbsp;&nbsp;(<i>', data.totalCount, '</i>)',
             '<br>Issues: <strong>', data.issuesCount, '</strong>',
             '<br>Comments: <strong>', data.commentsCount, '</strong>',
+            '<br>Users: <strong>', data.usersCount, '</strong>',
             '</div>'].join('');
         }
       }
@@ -162,6 +163,8 @@
           break;
 
         case 'users':
+          color.domain([0, maxUsers]);
+          worldStatsMap.updateChoropleth(createWorldStatsColorMap(stats.world_stats, color, 'usersCount'));
           break;
 
         case 'issues':
