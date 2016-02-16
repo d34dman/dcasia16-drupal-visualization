@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="shortcut icon" href="http://dcasia16projecthealth.d34dman.com/sites/all/themes/dcasia16/favicon.ico" type="image/vnd.microsoft.icon">
-    <title>PM Kickstart</title>
+    <title>Visualize Drupal | DrupalCon Asia 2016 Developer Contest</title>
     <link type="text/css" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" media="all">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <style>
@@ -15,6 +15,14 @@
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <script src="http://dcasia16projecthealth.d34dman.com/sites/all/themes/dcasia16/js/dist/js/app.js?o2mlhx"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+    <script src="//d3js.org/queue.v1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+    <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
+    <script src="javascripts/script.js"></script>
+    <script src="javascripts/d3.hexbin.min.js"></script>
+    <script src="javascripts/hexbin.js"></script>
+
     <!-- ADD THE CLASS sidedar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
   </head>
   <body class="html skin-black sidebar-collapse">
@@ -24,12 +32,12 @@
       <div class="content-wrapper" style="min-height: 94px;">
         <section class="content-header">
           <h1 class="js-content-header">
-            <span>PM Kickstart</span>
-            <small>pmkickstart</small>
+            <span>Project</span>
+            <small>unknown</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="http://d34dman.github.io/dcasia16-drupal-visualization/"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
+            <li class="active">Status</li>
           </ol>
         </section>
         <!-- Main content -->
@@ -41,9 +49,9 @@
                 <section class="content">
                   <div class="row">
                     <div class="col-md-3 col-sm-6 col-xs-12">
-                      <div class="info-box bg-aqua">
+                      <div class="info-box js-snapshot">
                         <span class="info-box-icon"><i class="fa fa-info"></i></span>
-                        <div class="info-box-content js-snapshot">
+                        <div class="info-box-content">
                           <span class="info-box-text">Index status</span>
                           <span class="info-box-number">0%</span>
                           <div class="progress">
@@ -55,9 +63,9 @@
                       </div>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12">
-                      <div class="info-box bg-green">
+                      <div class="info-box js-project-download">
                         <span class="info-box-icon "><i class="fa fa-download"></i></span>
-                        <div class="info-box-content js-project-download">
+                        <div class="info-box-content">
                           <span class="info-box-text">Downloads</span>
                           <span class="info-box-number"></span>
                         </div>
@@ -65,9 +73,9 @@
                       </div>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12">
-                      <div class="info-box bg-yellow">
+                      <div class="info-box js-project-comments">
                         <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
-                        <div class="info-box-content js-project-comments">
+                        <div class="info-box-content">
                           <span class="info-box-text">Comments</span>
                           <span class="info-box-number">14</span>
                           <div class="progress hidden">
@@ -79,9 +87,9 @@
                       </div>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12">
-                      <div class="info-box bg-red">
+                      <div class="info-box js-project-issues">
                         <span class="info-box-icon"><i class="fa fa-star-o"></i></span>
-                        <div class="info-box-content js-project-issues">
+                        <div class="info-box-content">
                           <span class="info-box-text">Issues</span>
                           <span class="info-box-number">2</span>
                           <div class="progress">
@@ -97,7 +105,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <div class="box box-solid bg-light-blue-gradient viz-box">
                         <div class="box-header ui-sortable-handle">
-                          <i class="fa fa-map-marker"></i><h3 class="box-title">User Map</h3>
+                          <i class="fa fa-map-marker"></i><h3 class="box-title">Activity Map</h3>
                         </div>
                         <div class="box-body">
                           <div id="map-container" style="width: 100%; height: 300px;">
@@ -116,10 +124,11 @@
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <div class="box box-solid bg-light-blue-gradient viz-box">
                         <div class="box-header ui-sortable-handle">
-                          <i class="fa fa-map-marker"></i><h3 class="box-title">User Demographics</h3>
+                          <i class="fa fa-users"></i><h3 class="box-title">User Demographics</h3>
                         </div>
                         <div class="box-body">
-                          <div id="user-container" style="width: 100%; height: 300px;"></div>
+                          <div id="user-container" style="width: 100%; height: 300px;">
+                          </div>
                         </div>
                         <div class="box-footer no-border">
                           <ul class="nav nav-pills nav-justified">
@@ -183,7 +192,7 @@
                     <!-- ./col -->
                     <div class="col-lg-3 col-xs-6">
                       <!-- small box -->
-                      <div class="small-box bg-red js-project-open-issues">
+                      <div class="small-box js-project-open-issues">
                         <div class="inner">
                           <h3 class="count"></h3>
                           <p>Open Issues</p>
@@ -199,11 +208,6 @@
                     <!-- ./col -->
                   </div>
                 </section>
-                <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
-                <script src="//d3js.org/queue.v1.min.js"></script>
-                <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
-                <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
-                <script src="script.js"></script>
                 </section> <!-- /.block -->
               </div>
             </section>
