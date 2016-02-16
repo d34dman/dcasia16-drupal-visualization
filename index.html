@@ -1,0 +1,253 @@
+<html lang="en" dir="ltr" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" class="js">
+  <head profile="http://www.w3.org/1999/xhtml/vocab">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" href="http://dcasia16projecthealth.d34dman.com/sites/all/themes/dcasia16/favicon.ico" type="image/vnd.microsoft.icon">
+    <meta name="Generator" content="Drupal 7 (http://drupal.org)">
+    <title>Drupal Project Health</title>
+    <link type="text/css" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" media="all">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <style>
+      @import url("http://dcasia16projecthealth.d34dman.com/sites/all/themes/dcasia16/css/AdminLTE.css?o2mlhx");
+      @import url("http://dcasia16projecthealth.d34dman.com/sites/all/themes/dcasia16/css/custom.css?o2mlhx");
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://dcasia16projecthealth.d34dman.com/sites/all/themes/dcasia16/js/dist/js/app.js?o2mlhx"></script>
+  <!-- ADD THE CLASS sidedar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
+  <body class="html skin-black sidebar-collapse">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper" style="min-height: 94px;">
+        <!-- Main content -->
+        <section class="content">
+          <section>
+            <a id="main-content"></a>
+            <div class="region region-content">
+              <section id="block-system-main" class="block block-system clearfix">
+                <section class="content">
+                  <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                      <div class="info-box bg-aqua">
+                        <span class="info-box-icon"><i class="fa fa-info"></i></span>
+                        <div class="info-box-content">
+                          <span class="info-box-text">Index status</span>
+                          <span class="info-box-number">100%</span>
+                          <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                          </div>
+                          <span class="progress-description">
+                          Wed, 02/10/2016 - 14:37          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                      <div class="info-box bg-green">
+                        <span class="info-box-icon "><i class="fa fa-download"></i></span>
+                        <div class="info-box-content">
+                          <span class="info-box-text">Downloads</span>
+                          <span class="info-box-number">452</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                      <div class="info-box bg-yellow">
+                        <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
+                        <div class="info-box-content">
+                          <span class="info-box-text">Comments</span>
+                          <span class="info-box-number">14</span>
+                          <div class="progress">
+                            <div class="progress-bar" style="width: 0%"></div>
+                          </div>
+                          <span class="progress-description">
+                          0 new comments
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                      <div class="info-box bg-red">
+                        <span class="info-box-icon"><i class="fa fa-star-o"></i></span>
+                        <div class="info-box-content">
+                          <span class="info-box-text">Issues</span>
+                          <span class="info-box-number">2</span>
+                          <div class="progress">
+                            <div class="progress-bar" style="width: 50%"></div>
+                          </div>
+                          <span class="progress-description">
+                          1 open issues
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- =========================================================== -->
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="box box-solid bg-light-blue-gradient">
+                        <div class="box-header ui-sortable-handle">
+                          <i class="fa fa-map-marker"></i><h3 class="box-title">User Map</h3>
+                        </div>
+                        <div class="box-body">
+                          <div id="map-container" style="width: 100%; height: 300px;">
+                          </div>
+                        </div>
+                        <div class="box-footer no-border">
+                          <div class="row">
+                            <div class="col-xs-3 text-center" style="border-right: 1px solid #f4f4f4">
+                              <div id="sparkline-1"></div>
+                              <div class="knob-label">Users</div>
+                            </div>
+                            <div class="col-xs-3 text-center" style="border-right: 1px solid #f4f4f4">
+                              <div id="sparkline-2"></div>
+                              <div class="knob-label">Issues</div>
+                            </div>
+                            <div class="col-xs-3 text-center">
+                              <div id="sparkline-3"></div>
+                              <div class="knob-label">Comments</div>
+                            </div>
+                            <div class="col-xs-3 text-center">
+                              <div id="sparkline-3"></div>
+                              <div class="knob-label">Total</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="box box-solid bg-light-blue-gradient">
+                        <div class="box-header ui-sortable-handle">
+                          <i class="fa fa-map-marker"></i><h3 class="box-title">User Demographics</h3>
+                        </div>
+                        <div class="box-body">
+                          <div id="user-container" style="width: 100%; height: 300px;"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.row -->
+                  <!-- =========================================================== -->
+                  <!-- Small boxes (Stat box) -->
+                  <div class="row">
+                    <div class="col-lg-3 col-xs-6">
+                      <!-- small box -->
+                      <div class="small-box bg-aqua">
+                        <div class="inner">
+                          <h3>150</h3>
+                          <p>New Orders</p>
+                        </div>
+                        <div class="icon">
+                          <i class="fa fa-shopping-cart"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                          More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-xs-6">
+                      <!-- small box -->
+                      <div class="small-box bg-green">
+                        <div class="inner">
+                          <h3>53<sup style="font-size: 20px">%</sup></h3>
+                          <p>Bounce Rate</p>
+                        </div>
+                        <div class="icon">
+                          <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                          More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-xs-6">
+                      <!-- small box -->
+                      <div class="small-box bg-yellow">
+                        <div class="inner">
+                          <h3>44</h3>
+                          <p>User Registrations</p>
+                        </div>
+                        <div class="icon">
+                          <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                          More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-xs-6">
+                      <!-- small box -->
+                      <div class="small-box bg-red">
+                        <div class="inner">
+                          <h3>1</h3>
+                          <p>Open Issues</p>
+                        </div>
+                        <div class="icon">
+                          <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="https://www.drupal.org/project/issues/pmkickstart" target="_blank" class="small-box-footer">
+                          More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <!-- ./col -->
+                  </div>
+                  <!-- /.row -->
+                </section>
+                <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+                <script src="//d3js.org/queue.v1.min.js"></script>
+                <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+                <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
+                <script>
+                queue()
+                .defer(d3.json, "data/drupal.json")
+                .await(ready);
+                function ready(error, stats) {
+                  console.log(stats);
+                  debugger;
+                var map = new Datamap({
+                element: document.getElementById('map-container'),
+                fills: {
+                HIGHEST: '#0678be',
+                HIGH: '#129FF8',
+                LOW: '#39AFF9',
+                LOWEST: '#74C7FB',
+                defaultFill: '#FFFFFF'
+                },
+                data: stats.world_stats,
+                geographyConfig: {
+                // don't change color on mouse hover
+                highlightFillColor: function(geo) {
+                return geo['fillKey'] || '#FFFFFF';
+                },
+                popupTemplate: function(geo, data) {
+                // don't show tooltip if country don't present in dataset
+                if (!data) { return ; }
+                return ['<div class="hoverinfo bg-yellow">',
+                  '<strong>', geo.properties.name, '</strong>',
+                  '&nbsp;&nbsp;(<i>', data.totalCount, '</i>)',
+                  '<br>Issues: <strong>', data.issuesCount, '</strong>',
+                  '<br>Comments: <strong>', data.commentsCount, '</strong>',
+                '</div>'].join('');
+                }
+                }
+                });
+                }
+                </script>
+                </section> <!-- /.block -->
+              </div>
+            </section>
+            </section><!-- /.content -->
+            </div><!-- /.content-wrapper -->
+            <footer class="main-footer">
+              <div class="pull-right hidden-xs">
+                Theme credits <a href="https://github.com/almasaeed2010/AdminLTE"><b>AdminLTE</b></a>
+              </div>
+              <br>
+      </div>
+    </div>
