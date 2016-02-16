@@ -2,3 +2,7 @@
   line-height: 2em;
   display: inline-block;
 }
+
+.viz-box .box-footer {
+  padding: 0px;
+}
