@@ -50,6 +50,9 @@
    * Visualization Logic.
    */
   var updateInfoCards = function(stats){
+    $('.js-content-header span').text(stats.project.data.title) ;
+    $('.js-content-header small').text(stats.project.name) ;
+
     $('.js-snapshot .info-box-number').text(stats.snapshot.progress + '%') ;
     $('.js-snapshot .progress-bar').width(stats.snapshot.progress + '%') ;
     $('.js-snapshot .progress-description').text(timeConverter(stats.snapshot.created));
