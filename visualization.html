@@ -96,24 +96,12 @@
                           </div>
                         </div>
                         <div class="box-footer no-border">
-                          <div class="row">
-                            <div class="col-xs-3 text-center" style="border-right: 1px solid #f4f4f4">
-                              <div id="sparkline-1"></div>
-                              <div class="knob-label">Users</div>
-                            </div>
-                            <div class="col-xs-3 text-center" style="border-right: 1px solid #f4f4f4">
-                              <div id="sparkline-2"></div>
-                              <div class="knob-label">Issues</div>
-                            </div>
-                            <div class="col-xs-3 text-center">
-                              <div id="sparkline-3"></div>
-                              <div class="knob-label">Comments</div>
-                            </div>
-                            <div class="col-xs-3 text-center">
-                              <div id="sparkline-3"></div>
-                              <div class="knob-label">Total</div>
-                            </div>
-                          </div>
+                          <ul class="nav nav-pills nav-justified">
+                            <li role="presentation" class="active"><a href="#">Total</a></li>
+                            <li role="presentation"><a href="#">Issues</a></li>
+                            <li role="presentation"><a href="#">Comments</a></li>
+                            <li role="presentation"><a href="#">Users</a></li>
+                          </ul>
                         </div>
                       </div>
                     </div>
@@ -125,13 +113,21 @@
                         <div class="box-body">
                           <div id="user-container" style="width: 100%; height: 300px;"></div>
                         </div>
+                        <div class="box-footer no-border">
+                          <ul class="nav nav-pills nav-justified">
+                            <li role="presentation" class="active"><a href="#">Total</a></li>
+                            <li role="presentation"><a href="#">Age Group 1</a></li>
+                            <li role="presentation"><a href="#">Age Group 2</a></li>
+                            <li role="presentation"><a href="#">Age Group 3</a></li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-lg-3 col-xs-6">
                       <!-- small box -->
-                      <div class="small-box bg-aqua">
+                      <div class="small-box bg-aqua hidden">
                         <div class="inner">
                           <h3>150</h3>
                           <p>New Orders</p>
@@ -147,7 +143,7 @@
                     <!-- ./col -->
                     <div class="col-lg-3 col-xs-6">
                       <!-- small box -->
-                      <div class="small-box bg-green">
+                      <div class="small-box bg-green hidden">
                         <div class="inner">
                           <h3>53<sup style="font-size: 20px">%</sup></h3>
                           <p>Bounce Rate</p>
@@ -163,7 +159,7 @@
                     <!-- ./col -->
                     <div class="col-lg-3 col-xs-6">
                       <!-- small box -->
-                      <div class="small-box bg-yellow">
+                      <div class="small-box bg-yellow hidden">
                         <div class="inner">
                           <h3>44</h3>
                           <p>User Registrations</p>
