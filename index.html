@@ -9,13 +9,14 @@
     <link type="text/css" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" media="all">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <style>
-      @import url("http://dcasia16projecthealth.d34dman.com/sites/all/themes/dcasia16/css/AdminLTE.css?o2mlhx");
-      @import url("http://dcasia16projecthealth.d34dman.com/sites/all/themes/dcasia16/css/custom.css?o2mlhx");
+    @import url("http://dcasia16projecthealth.d34dman.com/sites/all/themes/dcasia16/css/AdminLTE.css?o2mlhx");
+    @import url("http://dcasia16projecthealth.d34dman.com/sites/all/themes/dcasia16/css/custom.css?o2mlhx");
     </style>
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <script src="http://dcasia16projecthealth.d34dman.com/sites/all/themes/dcasia16/js/dist/js/app.js?o2mlhx"></script>
-  <!-- ADD THE CLASS sidedar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
+    <!-- ADD THE CLASS sidedar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
+  </head>
   <body class="html skin-black sidebar-collapse">
     <!-- Site wrapper -->
     <div class="wrapper">
@@ -84,7 +85,6 @@
                       </div>
                     </div>
                   </div>
-                  <!-- =========================================================== -->
                   <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <div class="box box-solid bg-light-blue-gradient">
@@ -128,9 +128,6 @@
                       </div>
                     </div>
                   </div>
-                  <!-- /.row -->
-                  <!-- =========================================================== -->
-                  <!-- Small boxes (Stat box) -->
                   <div class="row">
                     <div class="col-lg-3 col-xs-6">
                       <!-- small box -->
@@ -197,48 +194,12 @@
                     </div>
                     <!-- ./col -->
                   </div>
-                  <!-- /.row -->
                 </section>
                 <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
                 <script src="//d3js.org/queue.v1.min.js"></script>
                 <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
                 <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
-                <script>
-                queue()
-                .defer(d3.json, "data/drupal.json")
-                .await(ready);
-                function ready(error, stats) {
-                  console.log(stats);
-                  debugger;
-                var map = new Datamap({
-                element: document.getElementById('map-container'),
-                fills: {
-                HIGHEST: '#0678be',
-                HIGH: '#129FF8',
-                LOW: '#39AFF9',
-                LOWEST: '#74C7FB',
-                defaultFill: '#FFFFFF'
-                },
-                data: stats.world_stats,
-                geographyConfig: {
-                // don't change color on mouse hover
-                highlightFillColor: function(geo) {
-                return geo['fillKey'] || '#FFFFFF';
-                },
-                popupTemplate: function(geo, data) {
-                // don't show tooltip if country don't present in dataset
-                if (!data) { return ; }
-                return ['<div class="hoverinfo bg-yellow">',
-                  '<strong>', geo.properties.name, '</strong>',
-                  '&nbsp;&nbsp;(<i>', data.totalCount, '</i>)',
-                  '<br>Issues: <strong>', data.issuesCount, '</strong>',
-                  '<br>Comments: <strong>', data.commentsCount, '</strong>',
-                '</div>'].join('');
-                }
-                }
-                });
-                }
-                </script>
+                <script src="script.js"></script>
                 </section> <!-- /.block -->
               </div>
             </section>
@@ -249,5 +210,17 @@
                 Theme credits <a href="https://github.com/almasaeed2010/AdminLTE"><b>AdminLTE</b></a>
               </div>
               <br>
-      </div>
-    </div>
+              <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-73844612-1', 'auto');
+                ga('send', 'pageview');
+
+              </script>
+            </footer>
+          </div>
+        </body>
+      </html>
