@@ -65,6 +65,14 @@
     }
   }
 
+  var createWorldStatsColorMap = function(worldStats, color, keyName){
+    var newColorMap = {};
+    for (var key in worldStats) {
+      if (!worldStats.hasOwnProperty(key)) continue;
+      newColorMap[key] = worldStats[key].totalCount ? color(worldStats[key][keyName]) : color(1);
+    }
+    return newColorMap;
+  }
   /**
    * Visualization Logic.
    */
@@ -99,7 +107,7 @@
     $('.js-project-open-issues').addClass(getInfoCardColour(50, 0, stats.issues.openCount));
     $('.js-project-open-issues a.issues-link').attr('href', 'https://www.drupal.org/project/issues/' + stats.project.name);
   }
-debugger;
+
   queue()
     .defer(d3.json, "data/" + QueryString.project + ".json")
     .await(ready);
@@ -109,26 +117,30 @@ debugger;
     if (stats.snapshot.progress < 100) {
       return;
     }
+
+    var color = d3.scale.linear()
+      .range(["hsl(62,100%,90%)", "hsl(228,30%,20%)"])
+      .interpolate(d3.interpolateHcl);
+
+    var worldStatsArray = Object.keys(stats.world_stats).map(function (key) { return stats.world_stats[key]; });
+    var maxComments = Math.max.apply(Math,worldStatsArray.map(function(o){return o.commentsCount;}))
+    var maxIssues = Math.max.apply(Math,worldStatsArray.map(function(o){return o.issuesCount;}))
+    var maxTotal = Math.max.apply(Math,worldStatsArray.map(function(o){return o.totalCount;}))
     console.log(stats);
-    var map = new Datamap({
+    var worldStatsMap = new Datamap({
       element: document.getElementById('map-container'),
       fills: {
-        HIGHEST: '#0678be',
-        HIGH: '#129FF8',
-        LOW: '#39AFF9',
-        LOWEST: '#74C7FB',
-        defaultFill: '#FFFFFF'
+        defaultFill: '#efefff'
       },
       data: stats.world_stats,
       geographyConfig: {
-        highlightFillColor: function(geo) {
-          return geo['fillKey'] || '#FFFFFF';
-        },
+        borderColor:  '#dddddd',
+        highlightBorderColor:  '#ffffff',
         popupTemplate: function(geo, data) {
           if (!data) {
             return;
           }
-          return ['<div class="hoverinfo bg-yellow">',
+          return ['<div class="hoverinfo bg-aqua">',
             '<strong>', geo.properties.name, '</strong>',
             '&nbsp;&nbsp;(<i>', data.totalCount, '</i>)',
             '<br>Issues: <strong>', data.issuesCount, '</strong>',
@@ -145,15 +157,21 @@ debugger;
 
       switch($this.attr('data-trigger')) {
         case 'total':
+          color.domain([0, maxTotal]);
+          worldStatsMap.updateChoropleth(createWorldStatsColorMap(stats.world_stats, color, 'totalCount'));
           break;
 
         case 'users':
           break;
 
         case 'issues':
+          color.domain([0, maxIssues]);
+          worldStatsMap.updateChoropleth(createWorldStatsColorMap(stats.world_stats, color, 'issuesCount'));
           break;
 
         case 'comments':
+          color.domain([0, maxComments]);
+          worldStatsMap.updateChoropleth(createWorldStatsColorMap(stats.world_stats, color, 'commentsCount'));
           break;
 
         default:
