@@ -3,6 +3,7 @@
  *   Javascript that initializes visualizations on the page.
  */
 
+(function ($) {
   // @link: http://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-url-parameter.
   var QueryString = function () {
     // This function is anonymous, is executed immediately and
@@ -61,3 +62,6 @@
       }
     });
   }
+
+})(jQuery);
+
