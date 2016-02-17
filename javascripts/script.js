@@ -115,16 +115,13 @@
         var width = $(id).width();
         var height = $(id).height();
         var histoGramWidth = width * 0.6;
-        var histoGramHeight = height * 0.8;
+        var histoGramHeight = height * 0.9;
         var pieChartWidth = width * 0.4;
         var pieChartHeight = height * 0.4;
         var legendWidth = width * 0.4;
         var legendHeight = height * 0.4;
         var barColor = '#30bbbb';
         function segColor(c){ return {males:"#0073b7", females:"#f012be", unknown:"#d2d6de"}[c]; }
-
-        // compute total for each state.
-        fData.forEach(function(d){d.total=d.freq.males+d.freq.females+d.freq.unknown;});
 
         // function to handle histogram.
         function histoGram(fD){
@@ -147,7 +144,7 @@
             hGsvg.append("g").attr("class", "x axis")
                 .attr("transform", "translate(0," + hGDim.h + ")")
                 .call(d3.svg.axis().scale(x).orient("bottom"));
-
+debugger;
             // Create function for y-axis map.
             var y = d3.scale.linear().range([hGDim.h, 0])
                     .domain([0, d3.max(fD, function(d) { return d[1]; })]);
@@ -339,20 +336,22 @@
     var userActivityArray = Object.keys(stats.users.latest_activity).map(function (key) {
       return {
         year: stats.users.latest_activity[key].year,
+        total: +stats.users.latest_activity[key].users,
         freq:{
-          males:stats.users.latest_activity[key].males,
-          females:stats.users.latest_activity[key].females,
-          unknown:stats.users.latest_activity[key].unknown
+          males: +stats.users.latest_activity[key].males,
+          females: +stats.users.latest_activity[key].females,
+          unknown: +stats.users.latest_activity[key].unknown
         }
       };
     });
     var userAgeArray = Object.keys(stats.users.age).map(function (key) {
       return {
-        age: stats.users.age[key].age,
+        age: +stats.users.age[key].age,
+        total: +stats.users.age[key].users,
         freq:{
-          males:stats.users.age[key].males,
-          females:stats.users.age[key].females,
-          unknown:stats.users.age[key].unknown
+          males: +stats.users.age[key].males,
+          females: +stats.users.age[key].females,
+          unknown: +stats.users.age[key].unknown
         }
       };
     });
