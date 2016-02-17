@@ -121,7 +121,8 @@
     var color = d3.scale.linear()
       .range(["hsl(62,100%,90%)", "hsl(228,30%,20%)"])
       .interpolate(d3.interpolateHcl);
-
+    var worldStatsUndefinedCountry = (stats.world_stats[""]) ? stats.world_stats[""] : null;
+    delete(stats.world_stats[""]);
     var worldStatsArray = Object.keys(stats.world_stats).map(function (key) { return stats.world_stats[key]; });
     var maxComments = Math.max.apply(Math,worldStatsArray.map(function(o){return o.commentsCount;}))
     var maxIssues = Math.max.apply(Math,worldStatsArray.map(function(o){return o.issuesCount;}))
@@ -141,12 +142,12 @@
           if (!data) {
             return;
           }
-          return ['<div class="hoverinfo bg-aqua">',
-            '<strong>', geo.properties.name, '</strong>',
-            '<br>Issues: <strong>', data.issuesCount, '</strong>',
-            '<br>Comments: <strong>', data.commentsCount, '</strong>',
-            '<br>Users: <strong>', data.usersCount, '</strong>',
-            '</div>'].join('');
+          return [
+            '<ul class="list-group world-stats-info"><li class="list-group-item bg-aqua"><i class="fa fa-globe"></i>&nbsp;&nbsp;<strong>', geo.properties.name, '</strong></li>',
+            '<li class="list-group-item">Issues <span class="badge">', data.issuesCount, '</span></li>',
+            '<li class="list-group-item">Comments <span class="badge">', data.commentsCount, '</span></li>',
+            '<li class="list-group-item">Users <span class="badge">', data.usersCount, '</span></li></ul>'
+          ].join('');
         }
       }
     });
