@@ -107,19 +107,8 @@
     $('.js-project-open-issues').addClass(getInfoCardColour(50, 0, stats.issues.openCount));
     $('.js-project-open-issues a.issues-link').attr('href', 'https://www.drupal.org/project/issues/' + stats.project.name);
   }
-  function barGraph(stats) {
-    var freqData=[
-    {State:'AL',freq:{low:4786, mid:1319, high:249}}
-    ,{State:'AZ',freq:{low:1101, mid:412, high:674}}
-    ,{State:'CT',freq:{low:932, mid:2149, high:418}}
-    ,{State:'DE',freq:{low:832, mid:1152, high:1862}}
-    ,{State:'FL',freq:{low:4481, mid:3304, high:948}}
-    ,{State:'GA',freq:{low:1619, mid:167, high:1063}}
-    ,{State:'IA',freq:{low:1819, mid:247, high:1203}}
-    ,{State:'IL',freq:{low:4498, mid:3852, high:942}}
-    ,{State:'IN',freq:{low:797, mid:1849, high:1534}}
-    ,{State:'KS',freq:{low:162, mid:379, high:471}}
-    ];
+
+  function barGraph(freqData, key) {
 
     function dashboard(id, fData){
         var width = $(id).width();
@@ -130,11 +119,11 @@
         var pieChartHeight = height * 0.4;
         var legendWidth = width * 0.4;
         var legendHeight = height * 0.4;
-        var barColor = 'steelblue';
-        function segColor(c){ return {low:"#807dba", mid:"#e08214",high:"#41ab5d"}[c]; }
+        var barColor = '#30bbbb';
+        function segColor(c){ return {males:"#0073b7", females:"#f012be", unknown:"#d2d6de"}[c]; }
 
         // compute total for each state.
-        fData.forEach(function(d){d.total=d.freq.low+d.freq.mid+d.freq.high;});
+        fData.forEach(function(d){d.total=d.freq.males+d.freq.females+d.freq.unknown;});
 
         // function to handle histogram.
         function histoGram(fD){
@@ -173,18 +162,18 @@
                 .attr("width", x.rangeBand())
                 .attr("height", function(d) { return hGDim.h - y(d[1]); })
                 .attr('fill',barColor)
-                .on("mouseover",mouseover)// mouseover is defined below.
-                .on("mouseout",mouseout);// mouseout is defined below.
+                .on("mouseover",mouseover)// mouseover is defined bemales.
+                .on("mouseout",mouseout);// mouseout is defined bemales.
 
             //Create the frequency labels above the rectangles.
             bars.append("text").text(function(d){ return d3.format(",")(d[1])})
                 .attr("x", function(d) { return x(d[0])+x.rangeBand()/2; })
                 .attr("y", function(d) { return y(d[1])-5; })
-                .attr("text-anchor", "middle");
+                .attr("text-anchor", "femalesdle");
 
             function mouseover(d){  // utility function to be called on mouseover.
                 // filter for selected state.
-                var st = fData.filter(function(s){ return s.State == d[0];})[0],
+                var st = fData.filter(function(s){ return s[key] == d[0];})[0],
                     nD = d3.keys(st.freq).map(function(s){ return {type:s, freq:st.freq[s]};});
 
                 // call update functions of pie-chart and legend.
@@ -252,13 +241,13 @@
             function mouseover(d){
                 // call the update function of histogram with new data.
                 hG.update(fData.map(function(v){
-                    return [v.State,v.freq[d.data.type]];}),segColor(d.data.type));
+                    return [v[key],v.freq[d.data.type]];}),segColor(d.data.type));
             }
             //Utility function to be called on mouseout a pie slice.
             function mouseout(d){
                 // call the update function of histogram with all data.
                 hG.update(fData.map(function(v){
-                    return [v.State,v.total];}), barColor);
+                    return [v[key],v.total];}), barColor);
             }
             // Animating the pie-slice requiring a custom function which specifies
             // how the intermediate paths should be drawn.
@@ -316,12 +305,12 @@
         }
 
         // calculate total frequency by segment for all state.
-        var tF = ['low','mid','high'].map(function(d){
+        var tF = ['males','females','unknown'].map(function(d){
             return {type:d, freq: d3.sum(fData.map(function(t){ return t.freq[d];}))};
         });
 
         // calculate total frequency by state for all segment.
-        var sF = fData.map(function(d){return [d.State,d.total];});
+        var sF = fData.map(function(d){return [d[key],d.total];});
 
         var hG = histoGram(sF), // create the histogram.
             pC = pieChart(tF), // create the pie-chart.
@@ -339,13 +328,33 @@
     if (stats.snapshot.progress < 100) {
       return;
     }
-    barGraph(stats);
+
     var color = d3.scale.linear()
       .range(["hsl(62,100%,90%)", "hsl(228,30%,20%)"])
       .interpolate(d3.interpolateHcl);
     var worldStatsUndefinedCountry = (stats.world_stats[""]) ? stats.world_stats[""] : null;
     delete(stats.world_stats[""]);
     var worldStatsArray = Object.keys(stats.world_stats).map(function (key) { return stats.world_stats[key]; });
+    var userActivityArray = Object.keys(stats.users.latest_activity).map(function (key) {
+      return {
+        year: stats.users.latest_activity[key].year,
+        freq:{
+          males:stats.users.latest_activity[key].males,
+          females:stats.users.latest_activity[key].females,
+          unknown:stats.users.latest_activity[key].unknown
+        }
+      };
+    });
+    var userAgeArray = Object.keys(stats.users.age).map(function (key) {
+      return {
+        age: stats.users.age[key].age,
+        freq:{
+          males:stats.users.age[key].males,
+          females:stats.users.age[key].females,
+          unknown:stats.users.age[key].unknown
+        }
+      };
+    });
     var maxComments = Math.max.apply(Math,worldStatsArray.map(function(o){return o.commentsCount;}))
     var maxIssues = Math.max.apply(Math,worldStatsArray.map(function(o){return o.issuesCount;}))
     var maxTotal = Math.max.apply(Math,worldStatsArray.map(function(o){return o.totalCount;}))
@@ -417,9 +426,11 @@
 
       switch($this.attr('data-trigger')) {
         case 'last-activity':
+          barGraph(userActivityArray, 'year');
           break;
 
         case 'age':
+          barGraph(userAgeArray, 'age');
           break;
 
         default:
