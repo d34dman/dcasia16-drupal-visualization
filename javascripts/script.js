@@ -111,6 +111,7 @@
   function barGraph(freqData, key) {
 
     function dashboard(id, fData){
+        $(id).empty();
         var width = $(id).width();
         var height = $(id).height();
         var histoGramWidth = width * 0.6;
