@@ -144,7 +144,6 @@
             hGsvg.append("g").attr("class", "x axis")
                 .attr("transform", "translate(0," + hGDim.h + ")")
                 .call(d3.svg.axis().scale(x).orient("bottom"));
-debugger;
             // Create function for y-axis map.
             var y = d3.scale.linear().range([hGDim.h, 0])
                     .domain([0, d3.max(fD, function(d) { return d[1]; })]);
@@ -359,7 +358,6 @@ debugger;
     var maxIssues = Math.max.apply(Math,worldStatsArray.map(function(o){return o.issuesCount;}))
     var maxTotal = Math.max.apply(Math,worldStatsArray.map(function(o){return o.totalCount;}))
     var maxUsers = Math.max.apply(Math,worldStatsArray.map(function(o){return o.usersCount;}))
-    console.log(stats);
     var worldStatsMap = new Datamap({
       element: document.getElementById('map-container'),
       fills: {
