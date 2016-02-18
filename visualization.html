@@ -61,6 +61,20 @@
                       </div>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12">
+                      <div class="info-box js-project-issues">
+                        <span class="info-box-icon"><i class="fa fa-star-o"></i></span>
+                        <div class="info-box-content">
+                          <span class="info-box-text">Issues</span>
+                          <span class="info-box-number"></span>
+                          <div class="progress">
+                            <div class="progress-bar"></div>
+                          </div>
+                          <span class="progress-description">
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2 col-sm-6 col-xs-12">
                       <div class="info-box js-project-download">
                         <span class="info-box-icon "><i class="fa fa-download"></i></span>
                         <div class="info-box-content">
@@ -70,7 +84,7 @@
                         <!-- /.info-box-content -->
                       </div>
                     </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-md-2 col-sm-6 col-xs-12">
                       <div class="info-box js-project-comments">
                         <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
                         <div class="info-box-content">
@@ -84,17 +98,20 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                      <div class="info-box js-project-issues">
-                        <span class="info-box-icon"><i class="fa fa-star-o"></i></span>
+                    <div class="col-md-2 col-sm-6 col-xs-12">
+                      <div class="info-box js-project-open-issues">
+                        <span class="info-box-icon"><i class="fa fa-exclamation"></i></span>
                         <div class="info-box-content">
-                          <span class="info-box-text">Issues</span>
-                          <span class="info-box-number"></span>
-                          <div class="progress">
+                          <span class="info-box-text">Open Issues</span>
+                          <span class="info-box-number count"></span>
+                          <div class="progress hidden">
                             <div class="progress-bar"></div>
                           </div>
                           <span class="progress-description">
                           </span>
+                          <a href="#" target="_blank" class="issues-link hidden">
+                            <i class="fa fa-arrow-circle-right"></i>
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -138,33 +155,26 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-lg-9 col-xs-12">
+                    <div class="col-lg-12 col-xs-12">
                       <!-- small box -->
-                      <div class="small-box bg-gray">
+                      <div class="small-box bg-maroon">
                         <div class="inner">
                           <h3 class="title"></h3>
-                          <p class="message"></p>
+                          <p class="message-default">
+                            Activity of users who have not disclosed their location are not included.
+                            <br>
+                            Users belonging to countries that uses non standard names (like "Unites States" instead of "United States of America") are not shown in <strong>Activity Map</strong>
+                            <br/>
+                            Arbitary threshold have been used to colour the info cards as of now.
+                            <br/>
+                          </p>
+                          <p class="message-dynamic">
+                          </p>
                         </div>
                         <div class="icon">
-                          <i class="fa fa-question"></i>
+                          <i class="fa fa-info"></i>
                         </div>
                         <a href="#" class="small-box-footer">
-                          More info <i class="fa fa-arrow-circle-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-xs-6">
-                      <!-- small box -->
-                      <div class="small-box js-project-open-issues">
-                        <div class="inner">
-                          <h3 class="count"></h3>
-                          <p>Open Issues</p>
-                        </div>
-                        <div class="icon">
-                          <i class="ion ion-pie-graph"></i>
-                        </div>
-                        <a href="#" target="_blank" class="small-box-footer issues-link">
                           More info <i class="fa fa-arrow-circle-right"></i>
                         </a>
                       </div>
