@@ -98,10 +98,10 @@
     }
 
     $('.js-project-download .info-box-number').text(numberWithCommas(stats.project.downloads));
-    $('.js-project-download').addClass(getInfoCardColour(0, 10000, numberWithCommas(stats.project.downloads)));
+    $('.js-project-download').addClass(getInfoCardColour(0, 10000, stats.project.downloads));
 
     $('.js-project-comments .info-box-number').text(numberWithCommas(stats.comments.totalCount));
-    $('.js-project-comments').addClass(getInfoCardColour(0, (stats.issues.totalCount * 5), numberWithCommas(stats.comments.totalCount)));
+    $('.js-project-comments').addClass(getInfoCardColour(0, (stats.issues.totalCount * 5), stats.comments.totalCount));
     $('.js-project-issues .info-box-number').text(numberWithCommas(stats.issues.totalCount));
     var issueClosedPercent = 100;
     if (stats.issues.totalCount > 0) {
