@@ -8,6 +8,14 @@
   /**
    * Helper functions.
    */
+
+  // @link: http://stackoverflow.com/a/2901298
+  function numberWithCommas(x) {
+      var parts = x.toString().split(".");
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return parts.join(".");
+  }
+
   // @link: http://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-url-parameter.
   var QueryString = function () {
     // This function is anonymous, is executed immediately and
@@ -89,22 +97,22 @@
       return;
     }
 
-    $('.js-project-download .info-box-number').text(stats.project.downloads);
-    $('.js-project-download').addClass(getInfoCardColour(0, 10000, stats.project.downloads));
+    $('.js-project-download .info-box-number').text(numberWithCommas(stats.project.downloads));
+    $('.js-project-download').addClass(getInfoCardColour(0, 10000, numberWithCommas(stats.project.downloads)));
 
-    $('.js-project-comments .info-box-number').text(stats.comments.totalCount);
-    $('.js-project-comments').addClass(getInfoCardColour(0, (stats.issues.totalCount * 5), stats.comments.totalCount));
-    $('.js-project-issues .info-box-number').text(stats.issues.totalCount);
+    $('.js-project-comments .info-box-number').text(numberWithCommas(stats.comments.totalCount));
+    $('.js-project-comments').addClass(getInfoCardColour(0, (stats.issues.totalCount * 5), numberWithCommas(stats.comments.totalCount)));
+    $('.js-project-issues .info-box-number').text(numberWithCommas(stats.issues.totalCount));
     var issueClosedPercent = 100;
     if (stats.issues.totalCount > 0) {
       issueClosedPercent = 100 *stats.issues.closedCount/stats.issues.totalCount;
       $('.js-project-issues .progress-bar').width((issueClosedPercent) + '%');
     };
-    $('.js-project-issues .progress-description').text(stats.issues.openCount + ' open issues');
+    $('.js-project-issues .progress-description').text(numberWithCommas(stats.issues.openCount) + ' open issues');
     $('.js-project-issues').addClass(getInfoCardColour(0, 100, issueClosedPercent));
 
-    $('.js-project-open-issues .count').text(stats.issues.openCount);
-    $('.js-project-open-issues').addClass(getInfoCardColour(50, 0, stats.issues.openCount));
+    $('.js-project-open-issues .count').text(numberWithCommas(stats.issues.openCount));
+    $('.js-project-open-issues').addClass(getInfoCardColour(50, 0, numberWithCommas(stats.issues.openCount)));
     $('.js-project-open-issues a.issues-link').attr('href', 'https://www.drupal.org/project/issues/' + stats.project.name);
   }
 
